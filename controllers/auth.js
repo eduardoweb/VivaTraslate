@@ -42,7 +42,7 @@ const loginCtrl = async (req, res) => {
       .select('password name role email');
 
     if (!user) {
-      handleHttpError("USER_NOT_EXISTS", 404);
+      handleHttpError(res, "USER_NOT_EXISTS", 200);
       return
     }
 
@@ -51,7 +51,7 @@ const loginCtrl = async (req, res) => {
     const check = await compare(req.password, hashPassword)
 
     if (!check) {
-      handleHttpError(res, "PASSWORD_INVALID", 401);
+      handleHttpError(res, "PASSWORD_INVALID", 200);
       return
     }
 
